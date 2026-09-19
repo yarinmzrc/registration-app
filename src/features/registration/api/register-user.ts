@@ -7,7 +7,8 @@ export async function registerUser(
 ): Promise<RegisterResponse> {
   const payload: RegisterPayload = {
     ...input,
-    attribution: readAttribution(),
+    // Only the params: capturedAt is local bookkeeping for the 30-day window.
+    attribution: readAttribution()?.params ?? null,
   };
 
   const res = await fetch("/api/register", {

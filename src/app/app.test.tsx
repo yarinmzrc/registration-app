@@ -53,7 +53,7 @@ describe("guest landing with modal + attribution params", () => {
     expect(
       await screen.findByText("Account created", {}, { timeout: 3000 }),
     ).toBeInTheDocument();
-    expect(payload?.attribution?.params).toEqual({
+    expect(payload?.attribution).toEqual({
       utm_source: "fb",
       utm_campaign: "spring",
     });
