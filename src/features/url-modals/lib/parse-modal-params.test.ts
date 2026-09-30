@@ -5,7 +5,9 @@ const parse = (search: string) => parseModalParams(new URLSearchParams(search));
 
 describe("parseModalParams", () => {
   it("returns the stack in URL order, last param on top", () => {
-    expect(parse("invite=f1&utm_source=fb&promo=SAVE10&welcome=1&signup=1")).toEqual([
+    expect(
+      parse("invite=f1&utm_source=fb&promo=SAVE10&welcome=1&signup=1"),
+    ).toEqual([
       { type: "invite", value: "f1" },
       { type: "promo", value: "SAVE10" },
       { type: "welcome", value: "1" },

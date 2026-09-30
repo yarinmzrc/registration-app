@@ -4,6 +4,7 @@ import { useModal } from "../hooks/use-modal";
 import type { OpenModal } from "../types";
 import { InviteModal } from "./invite-modal";
 import { PromoModal } from "./promo-modal";
+import { SignupModal } from "./signup-modal";
 import { WelcomeModal } from "./welcome-modal";
 
 export function ModalRenderer() {
@@ -26,7 +27,7 @@ export function ModalRenderer() {
 
   // Only the top of the stack is mounted: dialogs that mount together each
   // mark the other inert, leaving none of them usable.
-  const top = openModals.filter((m) => m.type !== "signup").at(-1);
+  const top = openModals.at(-1);
   if (!top) return null;
 
   return <ModalFor key={top.type} modal={top} />;
@@ -41,10 +42,7 @@ function ModalFor({ modal }: { modal: OpenModal }) {
     case "invite":
       return <InviteModal friendId={modal.value} />;
     case "signup":
-      // Pending Product decision: the spec's "Registration modal" conflicts
-      // with "modals are authenticated-only". Guests are redirected above,
-      // and it's filtered out of the stack so it can't hide modals beneath.
-      return null;
+      return <SignupModal />;
     default: {
       const _exhaustive: never = modal.type;
       return _exhaustive;

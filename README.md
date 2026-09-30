@@ -50,6 +50,6 @@ Outside a feature, import only from its `index.ts` (`@/features/auth`), never fr
 
 localStorage fits the spec, but on Safari ITP deletes script-writable storage after 7 days without interaction, so the 30-day window would effectively shrink to 7. In production I'd capture at the edge, key attribution to a server-set first-party HttpOnly visitor cookie, apply the first-touch rule server-side, and backfill with server-to-server conversion APIs.
 
-## Open question
+## `?signup=1`
 
-The spec says `?signup=1` opens a Registration modal, but also that modals are only shown to signed-in users. Until Product decides, guests with `?signup=1` are redirected to `/register` and signed-in users see nothing.
+The spec says `?signup=1` opens a Registration modal, but also that modals are only shown to signed-in users. Per Product, it behaves like every other modal: signed-in users see a Registration modal, and guests are redirected to `/register`.

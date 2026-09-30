@@ -192,11 +192,20 @@ describe("URL-driven modals for an authenticated user", () => {
     ).toBeInTheDocument();
   });
 
-  it("does not let a pending signup param hide the modal beneath it", () => {
+  it("opens the registration modal on ?signup=1", () => {
+    signIn();
+    renderApp("/?signup=1");
+    expect(
+      screen.getByRole("dialog", { name: "Registration" }),
+    ).toBeInTheDocument();
+  });
+
+  it("puts signup on top of the stack when it is last in the URL", () => {
     signIn();
     renderApp("/?promo=SAVE10&signup=1");
+    expect(screen.getAllByRole("dialog", { hidden: true })).toHaveLength(1);
     expect(
-      screen.getByRole("dialog", { name: "Your promo code" }),
+      screen.getByRole("dialog", { name: "Registration" }),
     ).toBeInTheDocument();
   });
 
@@ -208,6 +217,12 @@ describe("URL-driven modals for an authenticated user", () => {
 });
 
 describe("routing", () => {
+  it("redirects guests with ?signup=1 to /register", () => {
+    const app = renderApp("/?signup=1");
+    expect(app.url()).toBe("/register?returnTo=%2F%3Fsignup%3D1");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
   it("redirects guests from /account to /register", () => {
     const app = renderApp("/account");
     expect(app.url()).toBe("/register?returnTo=%2Faccount");

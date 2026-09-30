@@ -1,4 +1,10 @@
-import { LogOut, Sparkles, TicketPercent, UserPlus } from "lucide-react";
+import {
+  IdCard,
+  LogOut,
+  Sparkles,
+  TicketPercent,
+  UserPlus,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/features/auth";
 import { useModal, type OpenModalArgs } from "@/features/url-modals";
@@ -15,6 +21,7 @@ const DEMO_MODALS: {
     args: { type: "promo", params: "SAVE10" },
   },
   { label: "Invite", icon: UserPlus, args: { type: "invite", params: "f42" } },
+  { label: "Registration", icon: IdCard, args: { type: "signup" } },
 ];
 
 export function Account() {

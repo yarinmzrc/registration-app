@@ -7,3 +7,4 @@ export * from "./components/modal-renderer";
 export * from "./components/welcome-modal";
 export * from "./components/promo-modal";
 export * from "./components/invite-modal";
+export * from "./components/signup-modal";
